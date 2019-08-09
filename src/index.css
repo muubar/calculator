@@ -1,0 +1,39 @@
+body {
+  background-color: #f49d37;
+  color: #070607;
+}
+
+button {
+  background-color: #f5f5f5;
+  border: none;
+  flex: 0 25%;
+  height: 5rem;
+}
+
+.operation-key {
+  background-color: #e8e8e8;
+}
+
+.operation-equal {
+  background-color: #f49d37;
+}
+
+.keypad {
+  display: flex;
+  /*width: 20rem;*/
+  flex-wrap: wrap;
+  border:3px solid black;
+}
+
+.calculator {
+  width: 20rem;
+}
+
+.display-elem {
+  cursor: text;
+  width: 100%;
+  border: 0;
+  background-color: #f5f5f5;
+  font-size: 2rem;
+  border-top: 1px solid black;
+}
