@@ -26,21 +26,18 @@ class Display extends React.Component {
   }
 }
 
-function Input(props) {
+function Display(props) {
   return (
-    <input type="text" className={props.className} disabled></input>
+    <div>
+      <Formula className='display-elem' curentFormula={props.curentFormula} />
+      <Input className='display-elem' currentVal={props.currentVal} />
+    </div>
   )
 }
 
-function Formula(props) {
+function Keypad(props) {
   return (
-    <input type="text" className={props.className} disabled></input>
-  )
-}
-
-function Keypad() {
-  return (
-    <div className='keypad'>
+    <div className='keypad' onClick={props.onClick}>
       <Key text='AC' />
       <Key text='+/-' />
       <Key text='%' />
@@ -48,7 +45,7 @@ function Keypad() {
       <Key text='7' />
       <Key text='8' />
       <Key text='9' />
-      <Key text='X' className='operation-key' />
+      <Key text='*' className='operation-key' />
       <Key text='4' />
       <Key text='5' />
       <Key text='6' />
@@ -63,6 +60,18 @@ function Keypad() {
       <Key text='=' className='operation-equal' />
     </div>
   );
+}
+
+function Input(props) {
+  return (
+    <input type="text" className={props.className} disabled value={props.currentVal}></input>
+  )
+}
+
+function Formula(props) {
+  return (
+    <input type="text" className={props.className} disabled value={props.curentFormula}></input>
+  )
 }
 
 function Key(props) {
