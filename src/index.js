@@ -2,25 +2,71 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-function Calculator() {
-  return (
-    <div className='calculator'>
-      <Display />
-      <Keypad />
-    </div>
-  )
-}
 
-class Display extends React.Component {
-  constructor(props) {
-    super(props);
-    this.name = "test";
+class Calculator extends React.Component {
+  handleClick = (e) => {
+    const text = e.target.innerText;
+    if (this.state.isResult) {
+      if (['%', '/', '*', '-', '+'].includes(text)) {
+        return this.setState((state) => ({ formula: `${state.formula}${text} `, val: '', isResult: false }))
+      }
+      else return this.setState({ formula: '', val: '', isResult: false });
+    }
+
+    else if (Number.isInteger(Number(text))) {
+      if (this.state.val === '0' || this.state.val === '-0') {
+        if (text === '0') return;
+        else return this.setState((state) => ({ val: state.val[0] === '-' ? '-' + text : text }));
+      }
+      else return this.setState((state) => ({ val: state.val + text }));
+    }
+
+    else if (text === '.' && !this.state.val.includes('.')) {
+      return this.setState((state) => ({ val: state.val.length === 0 ? '0.' : state.val + '.' }));
+    }
+
+    else if (text === 'del') {
+      this.setState((state) => ({ val: state.val.substring(0, state.val.length - 1) }));
+    }
+
+    else if (text === '+/-' && this.state.val.length > 0 && this.state.val !== '0') {
+      return this.setState((state) => ({ val: state.val[0] === '-' ? state.val.substring(1) : '-' + state.val }));
+    }
+
+    else if (text === 'AC') return this.setState({ formula: '', val: '' });
+
+    else if (['%', '/', '*', '-', '+'].includes(text)) {
+      if (this.state.val === '') return;
+      const num = Number(this.state.val);
+      if (Number.isNaN(num)) num = 0;
+      this.setState((state) => ({ formula: `${state.formula}${String(num)} ${text} `, val: '' }));
+    }
+
+    else if (text === '=') {
+      let num;
+      if (this.state.val !== '') {
+        num = Number(this.state.val);
+        //if (Number.isNaN(num)) num = 0;
+      }
+      if (num === undefined && this.state.formula === '') return;
+      this.setState((state) => ({
+        formula: num === undefined ? String(eval(state.formula.substring(0, state.formula.length - 2))) : String(eval(`${state.formula}${String(num)}`)),
+        val: '',
+        isResult: true
+      }))
+    }
   }
+
+  constructor() {
+    super()
+    this.state = { formula: '', val: '', isResult: false };
+  }
+
   render() {
     return (
-      <div>
-        <Formula className='display-elem' />
-        <Input className='display-elem' />
+      <div className='calculator' >
+        <Display curentFormula={this.state.formula} currentVal={this.state.val} />
+        <Keypad onClick={this.handleClick} />
       </div>
     )
   }
