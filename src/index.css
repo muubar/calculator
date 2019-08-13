@@ -1,6 +1,27 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
 body {
   background-color: #f49d37;
-  color: #070607;
+  color: #080708;
+  font-size: 22px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  border: 5px solid #f7f7f7;
+  border-radius: 15px;
+  width: 21rem;
+  padding: 5px;
+  background-color: #f7f7f7;
+  margin: 3rem auto;
 }
 
 button {
@@ -8,6 +29,16 @@ button {
   border: none;
   flex: 0 25%;
   height: 5rem;
+  font-size: inherit;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:active {
+  background-color: orange;
+  outline: 0;
 }
 
 .operation-key {
@@ -20,20 +51,41 @@ button {
 
 .keypad {
   display: flex;
-  /*width: 20rem;*/
   flex-wrap: wrap;
-  border:3px solid black;
 }
 
 .calculator {
   width: 20rem;
+  border:5px solid #929292;
 }
 
 .display-elem {
   cursor: text;
-  width: 100%;
-  border: 0;
+  text-align: right;
   background-color: #f5f5f5;
   font-size: 2rem;
-  border-top: 1px solid black;
+}
+
+.display-elem:disabled {
+  color: inherit;
+}
+
+.display-elem:first-of-type {
+  font-size: 1.4rem;
+  color: #69696b;
+}
+
+.display-elem:last-of-type {
+  font-weight: 700;
+}
+
+.display-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0.5rem 1rem 0.5rem;
+  background-color: #f5f5f5;
+}
+
+input:focus {
+  outline: none;
 }

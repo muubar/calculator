@@ -71,9 +71,11 @@ class Calculator extends React.Component {
 
   render() {
     return (
-      <div className='calculator' >
-        <Display curentFormula={this.state.formula} currentVal={this.state.val} />
-        <Keypad onClick={this.handleClick} />
+      <div className='container'>
+        <div className='calculator' >
+          <Display curentFormula={this.state.formula} currentVal={this.state.val} />
+          <Keypad onClick={this.handleClick} />
+        </div>
       </div>
     )
   }
