@@ -72,14 +72,16 @@ class Calculator extends React.Component {
   }
 }
 
+
 function Display(props) {
   return (
-    <div>
-      <Formula className='display-elem' curentFormula={props.curentFormula} />
-      <Input className='display-elem' currentVal={props.currentVal} />
+    <div className='display-container'>
+      <input type="text" className='display-elem' readOnly value={props.curentFormula}></input>
+      <input type="text" className='display-elem' readOnly value={props.currentVal}></input>
     </div>
   )
 }
+
 
 function Keypad(props) {
   return (
@@ -108,22 +110,12 @@ function Keypad(props) {
   );
 }
 
-function Input(props) {
-  return (
-    <input type="text" className={props.className} disabled value={props.currentVal}></input>
-  )
-}
-
-function Formula(props) {
-  return (
-    <input type="text" className={props.className} disabled value={props.curentFormula}></input>
-  )
-}
 
 function Key(props) {
   return (
     <button className={props.className}>{props.text}</button>
   )
 }
+
 
 ReactDOM.render(<Calculator />, document.getElementById('root'));
